@@ -5,4 +5,5 @@ class NuevaReserva (forms.ModelForm):
 
     class Meta:
         model = Reserva
-        fields = ('nombre', 'apellido', 'email', 'telefono', 'personas', 'dia', 'hora' )
+        fields = ('nombre', 'apellido', 'email', 'telefono', 'personas', 'dia', 'hora', 'restaurante', 'usuario' )
+        widgets = {'restaurante': forms.HiddenInput(), 'usuario': forms.HiddenInput()}

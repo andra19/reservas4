@@ -22,12 +22,13 @@ class restaurante(models.Model):
         return self.nombre
 
 class Reserva(models.Model):
-    usuario_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    restaurante = models.ForeignKey(restaurante, on_delete=models.CASCADE, blank=True, null=True)
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
-    telefono = models.IntegerField()
+    telefono = models.IntegerField(default=1)
     email = models.EmailField(max_length=100)
-    personas = models.IntegerField()
+    personas = models.IntegerField(default=1)
     dia = models.CharField(max_length=100)
     hora = models.CharField(max_length=100)
 

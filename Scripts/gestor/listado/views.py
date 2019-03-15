@@ -1,7 +1,11 @@
 from django.shortcuts import render_to_response, render, get_object_or_404
 from django.http import Http404
-from .models import restaurante
+from .models import restaurante, Reserva
 from .forms import NuevaReserva
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.template import RequestContext
+
 
 def lista(request):
     context = {
@@ -9,20 +13,28 @@ def lista(request):
     }
     return render_to_response('listado/listing.html', context)
 
-
+# @login_required(login_url="/")
 def detalles(request, pk):
     # context = {
     #     'restaurante': restaurante.objects.get(pk=pk)
     #     }
-    if request.method == 'POST' :
-        form = NuevaReserva(request.POST)
-    if form.is_valid():
-            form.save()
+    # reserva = Reserva()
+    form = NuevaReserva()
     context = {
+        # 'User': User.objects.get(pk=pk),
         'restaurante': restaurante.objects.get(pk=pk),
         'form': form
     }
-    return render('listado/detail.html', context)
+    if request.method == "POST":
+        form = NuevaReserva(request.POST)
+        form.restaurante = restaurante.pk
+        if form.is_valid():
+            form.restaurante = restaurante.pk
+            form.save(commit=False)
+            # form.usuario = User.pk
+            form.save()
+
+    return render(request,'listado/detail.html', context)
 
 # def reservas(request):
 #     form = NuevaReserva(request.POST)

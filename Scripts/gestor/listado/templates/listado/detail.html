@@ -88,13 +88,17 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                        <form method="POST">
+                        <form class="site-form" action="" method="POST">
                                
                                 <!-- {% csrf_token %} -->
                                 <!-- <div class="form-group input-group">
                                 <div class="input-group-prepend"> -->
                                         {% csrf_token %} 
-                                    <p> {{ form.as_p }}</p>
+                                    <p> {{ form.as_p }}
+                                        <input type="hidden" name="restaurante" id="id_restaurante" value="{{restaurante.pk}}">
+                                        <input type="hidden" name="usuario" id="id_usuario" value="{{User.pk}}">
+                                    </p>
+
                                 <button type="submit" class="btn btn-primary btn-block"> Reservar </button>
                                       
                         </form>
