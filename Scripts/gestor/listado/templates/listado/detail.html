@@ -4,7 +4,7 @@
 
 {% block content %}
    
-============================= BOOKING =============================
+
 <div>
     <!-- Swiper -->
     <div class="swiper-container">
@@ -189,16 +189,16 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                           <p> WI-FI: {{restaurante.WIFI}}</p>
+                           <p> WI-FI: {{restaurantes.WIFI}}</p>
                         </div>
                         <div class="col-md-4">
-                            <p> Permitido fumar: {{restaurante.fumar}} </p> 
+                            <p> Permitido fumar: {{restaurantes.fumar}} </p> 
                         </div>
                         <div class="col-md-4">
-                            <p> Estacionamiento: {{restaurante.estacionamiento}} 
+                            <p> Estacionamiento: {{restaurantes.estacionamiento}}  </p> 
                         </div>
                         <div class="col-md-4">
-                            <p> Acepta tarjetas: {{restaurante.tarjetas}} 
+                            <p> Acepta tarjetas: {{restaurantes.tarjetas}} </p>
                         </div>
                     </div>
                 </div>
@@ -270,19 +270,19 @@
                     <img src="images/map.jpg" class="img-fluid" alt="#">
                     <div class="address">
                         <span class="icon-location-pin"></span>
-                        <p> {{ restaurante.ubicacion}}</p>
+                        <p> {{ restaurantes.ubicacion}}</p>
                     </div>
                     <div class="address">
                         <span class="icon-screen-smartphone"></span>
-                        <p> {{ restaurante.telefono }}</p>
+                        <p> {{ restaurantes.telefono }}</p>
                     </div>
                     <div class="address">
                         <span class="icon-link"></span>
-                        <p> {{ restaurante.email}}</p>
+                        <p> {{ restaurantes.email}}</p>
                     </div>
                     <div class="address">
                         <span class="icon-clock"></span>
-                        <p> {{ restaurante.horarios}}<br>
+                        <p> {{ restaurantes.horarios}}<br>
                             <span class="open-now">ABIERTO</span></p>
                     </div>
                     <a href="#" class="btn btn-outline-primary btn-contact">ENVIAR UN MENSAJE</a>

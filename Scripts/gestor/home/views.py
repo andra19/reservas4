@@ -7,6 +7,10 @@ def home(request):
 def info(request):
     return render(request,'home/informacion.html') 
 
+def final(request):
+    return render(request,'listado/final.html') 
+
+
 # def Login(request):
 #     form = AuthenticationForm()
 #     if request.method == 'POST':

@@ -1,7 +1,7 @@
 from django.shortcuts import render, render_to_response
 # from .forms import NuevaReserva
 def reservas(request):
-      return render(request, 'home/index.html') 
+      return render(request, 'reservas/opciones.html') 
 # def reservas(request):
 #     return render (request, 'reservas/cancelar.html')
 
