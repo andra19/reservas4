@@ -1,25 +1,30 @@
 from django.shortcuts import render_to_response, render, get_object_or_404
-from .models import restaurante
+from .models import restaurante, Reserva
 from .forms import NuevaReserva
-from django.views.generic import ListView, DetailView, CreateView, FormView
+from django.views.generic import ListView, DetailView, CreateView, FormView, DeleteView
 from django.urls import reverse_lazy 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 class RestauranteListView(ListView):
     model = restaurante
     template_name = 'listado/listing.html'
     context_object_name = 'restaurantes'
 
-class RestauranteDetailView(DetailView, FormView):
-    model = restaurante
-    form_class = NuevaReserva
+class RestauranteDetailView(DetailView, CreateView):
+    model = Reserva
     template_name = 'listado/detail.html'
-    success_url = '/final/'
     context_object_name = 'restaurantes'
+    fields=['email', 'telefono', 'personas', 'dia', 'hora', 'restaurante']
+    success_url= '/listado/'
 
     def form_valid(self, form):
+        form.instance.usuario = self.request.user
         form.save()
-        return super(RestauranteDetailView, self).form_valid(form)
+        return super().form_valid(form)
+    
+    def get_queryset(self):
+        return restaurante.objects.all()
 
 
 

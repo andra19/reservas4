@@ -2,123 +2,67 @@
 
 {% load static %}
 
-{% block content %}
-   
+{% block content %}   
 
-<!--============================= RESERVE A SEAT =============================-->
 <section>
-                    <!--============== Button trigger modal ====================-->
-                    <span></span>
-                    <div class="reserve-btn">
-                        <div class="featured-btn-wrap">
-                            <a href="#reserva" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">Cancelar reserva</a>
-                        </div>
-                    </div>
-                    <span></span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--======================== Modal ==========================-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cancelar</h5>
-                    <button type="button d-flex justify-content-end" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                        <form class="site-form" action="" method="POST">
-                               
-                                <!-- {% csrf_token %} -->
-                                <!-- <div class="form-group input-group">
-                                <div class="input-group-prepend"> -->
-                                        {% csrf_token %} 
-                                    <p> {{ form.as_p }}
-                                        <input type="hidden" name="restaurante" id="id_restaurante" value="{{restaurante.pk}}">
-                                        <input type="hidden" name="usuario" id="id_usuario" value="{{User.pk}}">
-                                    </p>
 
-                                <button type="submit" class="btn btn-primary btn-block"> Cancelar </button>
-                                      
-                        </form>
-                    <!-- <form>
-                      <div class="form-row d-flex justify-content-center">
-                        <div class="col-md-6 mb-4">
-                          <label for="validationDefault01">Nombre</label>
-                          <input type="text" class="form-control" id="validationDefault01" placeholder="Nombre (Obligatorio)" required>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                          <label for="validationDefault02">Apellido</label>
-                          <input type="text" class="form-control" id="validationDefault02" placeholder="Apellido (Obligatorio)" required>
-                        </div>
-                      </div>
-                      <div class="form-row d-flex justify-content-center">
-                        <div class="col-md-6 mb-3">
-                          <label for="validationDefault03">E-mail</label>
-                          <input type="email" class="form-control" id="validationDefault03" placeholder="E-mail (Obligatorio)" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                          <label for="validationDefault04">Celular</label>
-                          <input type="tel" class="form-control" id="validationDefault04" placeholder="Celular (Obligatorio)" required>
-                        </div>
-                        <div class="form-row d-flex justify-content-center">
-                            <div class="col-md-3 mb-3">
-                              <label for="validationDefault05">Personas</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                </select>
-                            </div>
-                            <div class="col-md-9 mb-3">
-                              <label for="validationDefault05">Día</label>
-                              <input type="date"  autocomplete="on" class="form-control" id="validationDefault05"  required>
-                                <label for="validationDefault05">Hora</label>
-                                <input type="time" class="form-control" list="listahorasdeseadas" required>
-                                <datalist id="listahorasdeseadas">
-                                    <label for="validationDefault05">Hora promedio de irse</label>
-                                <input type= "time" class="form-control" list="listahorasdeseadas" required>
-                                <datalist id="listahorasdeseadas">
-
-                                   <option value="16:00">
-                                   <option value="16:30">
-                                   <option value="17:00">
-                                   <option value="17:30">
-                                   <option value="18:00">
-                                   <option value="18:30">
-                                   <option value="19:00">
-                                   <option value="19:30">
-                                   <option value="20:00">
-                                   <option value="20:30">
-                                   <option value="21:00">
-                                   <option value="21:30">
-                                   <option value="22:00">
-                                   <option value="22:30">
-                                   <option value="23:00">
-                                   <option value="23:30">
-                                   <option value="00:00">
-                                </datalist>
-                                
-                            </div>
-                        </div>
-                      </div>
-                      <button onClick=location.href="/listado/gracias/" class="btn btn-primary" type="submit">Reservar</button>
-                    </form> -->
-                </div>
-                
+{% for reserva in reservas %}
+<div class="row light-bg detail-options-wrap justify-content-center">
+    <div class="col-sm-6 col-lg-12 col-xl-6 featured-responsive">
+        <div class="featured-place-wrap">
+            <a href="{% url 'reserva-detalles' pk=reserva.pk %}"> 
                
-            </div>
+                <div class="featured-title-box">
+                    <h6>Restaurante: {{reserva.restaurante}}
+                        <hr>
+                        Numero de reserva: {{reserva.pk}}
+                    </h6>
+                    
+                    
+                    <ul>
+                        <li>
+                            
+                            <p>Hora: {{reserva.hora}}</p>
+                        </li>
+                        <li>
+                           
+                            <p>Dia: {{reserva.dia}}</p>
+                        </li>
+                        <li>
+                            
+                            <p>Personas: {{reserva.personas}}</p>
+                        </li>
+                    </ul>
+                                
+                </div>
+            </a>
         </div>
     </div>
-</section>
-<!--//END RESERVE A SEAT -->
-<!--============================= BOOKING DETAILS =============================-->
+</div>
+<div class="justify-content-center">
+        {% endfor %}   
+        {% if is_paginated %}  
+            {% if page_obj.has_previous %}
+                <a class="btn btn-outline-info mb-4" href="?page=1"> Primera</a>
+                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number}}"> Anterior</a>
+            {% endif %}
 
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <a class="btn btn-info mb-4" href="?page={{num}}"> {{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a class="btn btn-outline-info mb-4" href="?page={{num}}"> {{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number}}"> Siguiente</a>
+                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages}}"> Ultima </a>
+            {% endif %}
+
+        {% endif %}  
+</div>
+                       
+</section>
 
 {% endblock %}

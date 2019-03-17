@@ -8,8 +8,8 @@ class restaurante(models.Model):
     rating = models.IntegerField
     ubicacion = models.CharField(max_length=200)
     horarios = models.CharField(max_length=100)
-    telefono = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
+    telefono_restaurante = models.CharField(max_length=100)
+    email_restaurante = models.EmailField(max_length=100)
     fumar = models.CharField(max_length=100)
     WIFI = models.CharField(max_length=100)
     estacionamiento = models.CharField(max_length=100)
@@ -17,10 +17,11 @@ class restaurante(models.Model):
     tipoComida = models.CharField(max_length=100)
     comentarios = models.TextField(max_length=500)
 
-    
-
     def __str__(self):
         return self.nombre
+
+    def get_absolute_url(self):
+        return reverse('detalles', kwargs={'pk': self.pk})
 
 class Reserva(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
@@ -34,4 +35,4 @@ class Reserva(models.Model):
     hora = models.CharField(max_length=100)
 
     def get_absolute_url(self):
-        return reverse('detalles', kwargs={'pk': self.pk})
+        return reverse('reserva-delete', kwargs={'pk': self.pk})
