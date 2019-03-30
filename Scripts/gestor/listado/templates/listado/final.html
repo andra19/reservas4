@@ -4,6 +4,8 @@
 
 {% block content %}
 
+{% if reservas %}
+{% for reserva in reservas %}
  <!--============================= ADD LISTING =============================-->
  <section class="main-block light-bg">
     <div class="container">
@@ -11,7 +13,7 @@
             <div class="col-md-12">
               <div class="add-listing-wrap">
                     <h2>Gracias por tu reserva</h2>
-                  <p>Tu reserva Nº:3476 estara pronta el 19/03/2019 a las 20:00hrs mesa 7 </p>
+                  <p>Tu reserva Nº:{{reserva.pk}} estara pronta el {{reserva.dia}} a las {{reserva.hora}} mesa {{reserva.mesa}} </p>
                   <p>Gracias por tu eleccion </p>
                 </div>
             </div>
@@ -28,14 +30,49 @@
 <div>
     <pre>
     
-    
+
     
     
     
     
    </pre>
     </div>
+{% endfor %}
+    {%else%}
+
+<section class="main-block light-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="add-listing-wrap">
+                    <h2>Uppps </h2>
+                    
+                    <p>Tu reserva no pudo enviarse por favor intentalo de nuevo </p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="featured-btn-wrap">
+                    <a href="{% url 'index' %}" class="btn btn-primary btn-lg">Volver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div>
+    <pre>
+
+
+
+
+
+
+   </pre>
+</div>
 <!--//END ADD LISTING -->
+{% endif %}
+
 {% endblock %}
 
 

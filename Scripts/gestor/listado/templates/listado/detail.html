@@ -29,7 +29,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                           <p> WI-FI: {{restaurantes.WIFI}}</p>
+                           <p> WI-FI: {{restaurantes.wifi}}</p>
                         </div>
                         <div class="col-md-4">
                             <p> Permitido fumar: {{restaurantes.fumar}} </p> 
@@ -91,10 +91,14 @@
                 <div class="modal-body">
                     <form class="site-form" action="" method="POST">
                         {% csrf_token %} 
-                        <table> {{ form.as_table }}
-                            <td></td>
+                        <table> 
+                           <p> <strong>Usuario: {{ user.username }}</strong></p>
+                           <p> <strong>Restaurante: {{ restaurantes.nombre }}</strong></p>
+                            {{ form.as_table }}
+                            </table>
+                            <p> </p>
                             <td><button type="submit" class="btn btn-primary btn-block"> Reservar </button></td>
-                        </table>             
+                                  
                     </form>
                 </div> 
             </div>

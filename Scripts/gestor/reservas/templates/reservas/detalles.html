@@ -13,24 +13,24 @@
             <a href="#"> 
                
                 <div class="featured-title-box">
-                    <h6>Restaurante: {{reservas.restaurante}}
+                    <h6>Restaurante: {{object.restaurante}}
                         <hr>
-                        Numero de reserva: {{reservas.pk}}
+                        Numero de reserva: {{object.pk}}
                     </h6>
                     
                     
                     <ul>
                         <li>
                             
-                            <p>Hora: {{reservas.hora}}</p>
+                            <p>Hora: {{object.hora}}</p>
                         </li>
                         <li>
                            
-                            <p>Dia: {{reservas.dia}}</p>
+                            <p>Dia: {{object.dia}}</p>
                         </li>
                         <li>
                             
-                            <p>Personas: {{reservas.personas}}</p>
+                            <p>Personas: {{object.personas}}</p>
                         </li>
                         <li>
                                 <hr>
@@ -49,7 +49,8 @@
                                 </div>
                         </li>
                     </ul>
-                                
+                 <div><p> </p></div>   
+                 <div <div class="alert alert-danger" role="alert">Para cancelar o modificar las reservas tiene que ser con un plazo minimo de anterioridad de 1 dia </div>               
                 </div>
             </a>
         </div>
@@ -88,12 +89,13 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form class="site-form" action="" method="POST">
+                        <form class="site-form" method="POST">
                             {% csrf_token %} 
                             <table> 
-                                <td>Estas seguro que quieres eliminar la reserva?</td>
-                                <td><button type="submit" class="btn btn-primary btn-block"> Si, eliminar</button></td>
-                            </table>             
+                                <td>Estas seguro que quieres eliminar la reserva? {{object.restaurante}} N°: {{object.pk}} </td>
+                                <td><button type="submit" class="btn btn-primary btn-block"> Si, eliminar</button></td>    
+                            </table> 
+                            <div class="alert alert-danger" role="alert">Para CANCELAR toca afuera de la ventana</div>
                         </form>
                     </div> 
                 </div>

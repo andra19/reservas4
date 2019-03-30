@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response, render, get_object_or_404
-from .models import restaurante, Reserva
+from .models import restaurante, Reserva, menu
 from .forms import NuevaReserva
 from django.views.generic import ListView, DetailView, CreateView, FormView, DeleteView
 from django.urls import reverse_lazy 
@@ -15,11 +15,11 @@ class RestauranteDetailView(DetailView, CreateView):
     model = Reserva
     template_name = 'listado/detail.html'
     context_object_name = 'restaurantes'
-    fields=['email', 'telefono', 'personas', 'dia', 'hora', 'restaurante']
-    success_url= '/listado/'
+    fields=['email', 'telefono', 'personas', 'dia', 'hora' ,'mesa']
+    success_url= '/listado/gracias'
 
     def form_valid(self, form):
-        form.instance.usuario = self.request.user
+        form.instance.User= self.request.user
         form.save()
         return super().form_valid(form)
     
@@ -27,7 +27,19 @@ class RestauranteDetailView(DetailView, CreateView):
         return restaurante.objects.all()
 
 
+class reservasView(ListView):
+    model= Reserva
+    template_name = 'listado/final.html'
+    context_object_name = 'reservas'
+ 
+    def get_queryset(self):
+        return Reserva.objects.filter(User=self.request.user)
+    
 
+class MenuView(ListView):
+    model = menu
+    template_name = 'listado/menu.html'
+    context_object_name = 'menu'
 
 # class ReservaCreateView(FormView):
 #     template_name = 'listado/detail.html'

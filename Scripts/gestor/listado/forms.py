@@ -1,9 +1,10 @@
 from django import forms
-from .models import Reserva
+from .models import Reserva, restaurante
 
 class NuevaReserva (forms.ModelForm):
-
+    
     class Meta:
         model = Reserva
-        fields = ('nombre', 'apellido', 'email', 'telefono', 'personas', 'dia', 'hora', 'restaurante', 'usuario' )
-        widgets = {'restaurante': forms.HiddenInput(), 'usuario': forms.HiddenInput()}
+        fields = ('User', 'email', 'telefono', 'personas', 'dia', 'hora', 'mesa' )
+        widgets = {'User':forms.HiddenInput(),'restaurante': forms.HiddenInput(),
+        'dia':forms.DateInput,'hora':forms.TimeInput}

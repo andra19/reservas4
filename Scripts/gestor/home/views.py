@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.forms import AuthenticationForm
+from django.db.models import Q
+
 def home(request):
     return render(request, 'home/index.html') 
 
@@ -22,8 +24,8 @@ def final(request):
 #         return render(request,'usuario/registro.html', {'form':form})
 
 
-
-
-
-
-
+"""
+def busqueda(restaurante,nombre,ubicacion,q,q2):
+    resultado= restaurante.objects.filter(nombre__icontains=q | ubicacion__icontains =q2)
+    return resultado
+"""
